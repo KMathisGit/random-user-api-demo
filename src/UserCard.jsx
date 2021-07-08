@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./UserCard.scss";
 import linkedinLogo from "../images/linkedin_logo.png";
 import githubLogo from "../images/github_logo.png";
 
 const formatPhone = (phone) => `${phone.substr(0, 5)} ${phone.substr(6)}`;
 
-export default function UserCard({ user }) {
+export default function UserCard({ user, addUserCardRef }) {
   const fullName = `${user.name.first} ${user.name.last}`;
+  const cardRef = useRef();
   user.phone = formatPhone(user.phone);
   user.cell = formatPhone(user.cell);
 
+  useEffect(() => {
+    addUserCardRef(cardRef.current);
+  }, [cardRef]);
+
   return (
-    <div className="user-card">
+    <div className="user-card" ref={cardRef}>
       <div className="top-section">
         <img
           className="profile-pic"
@@ -19,10 +24,7 @@ export default function UserCard({ user }) {
           alt="user image"
         />
         <div className="personal-info">
-          <p className="name">
-            <label>Name</label>
-            {fullName}
-          </p>
+          <p className="name">{fullName}</p>
           <p className="email">
             <label>Email</label>
             <a href={`mailto:${user.email}`}>{user.email}</a>
@@ -49,7 +51,7 @@ export default function UserCard({ user }) {
       </div>
 
       <hr />
-      <p className="quote">{user.quote.quote}</p>
+      <blockquote className="quote">{user.quote.quote}</blockquote>
       <p className="author">- {user.quote.author}</p>
     </div>
   );

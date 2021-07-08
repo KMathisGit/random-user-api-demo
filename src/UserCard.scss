@@ -2,14 +2,19 @@
   box-shadow: 2px 2px 10px 1px rgb(0 0 0 / 60%);
   background: linear-gradient(135deg, #111, #1f1f1f);
   color: #fff;
-  padding: 2rem;
+  padding: 2em;
   width: 100%;
   max-width: 600px;
-  margin: 2rem;
+  margin: 2.5em;
   border-radius: 6px;
-  transform: perspective(850px) rotateX(35deg);
+  transform: perspective(700px) rotateX(30deg);
   transform-origin: center;
   transition: 0.3s transform linear;
+
+  &.centered {
+    transform: perspective(0px) rotateX(0deg) scale(1.15);
+    z-index: 2;
+  }
 
   .top-section {
     display: flex;
@@ -23,9 +28,10 @@
       top: 0;
 
       img {
-        width: 32px;
-        height: 32px;
-        margin-left: 1rem;
+        width: 24px;
+        height: 24px;
+        margin-left: 16px;
+        filter: invert(1);
       }
     }
 
@@ -43,7 +49,7 @@
       flex-direction: column;
 
       a {
-        color: #888;
+        color: rgb(107, 156, 168);
       }
 
       .phone-section {
@@ -55,18 +61,17 @@
       }
 
       p {
-        font-size: 0.9rem;
-        margin: 0.5em 0;
-        label {
-          font-size: 1rem;
+        &.name {
+          font-size: 1.5rem;
           font-weight: bold;
+          color: #fff;
+        }
+        margin-top: 0;
+        margin-bottom: 0.75em;
+        label {
+          font-weight: 500;
           display: block;
         }
-      }
-
-      #linkedin-logo,
-      #github-logo {
-        filter: invert(1);
       }
     }
   }
@@ -80,7 +85,7 @@
     margin: 1.5em 0;
   }
 
-  p.quote {
+  .quote {
     padding: 1em 0 1em 2em;
     position: relative;
     margin-bottom: 0;
@@ -91,9 +96,9 @@
     &::before {
       content: open-quote;
       position: absolute;
-      top: -24px;
+      top: -48px;
       left: -8px;
-      font-size: 6rem;
+      font-size: 6em;
       color: #555;
     }
 
@@ -106,5 +111,61 @@
   p.author {
     margin: 0;
     padding-left: 2em;
+  }
+
+  @media screen and (max-width: 767px) {
+    max-width: 400px;
+    font-size: 15px;
+    padding: 1.5em;
+    margin-bottom: 4em;
+
+    .top-section {
+      flex-direction: column;
+      .personal-info {
+        margin-top: 2em;
+        margin-left: 0;
+      }
+
+      .phone-section {
+        flex-direction: column;
+      }
+
+      .social-icons img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    p.quote {
+      font-size: 1em;
+
+      &::before {
+        font-size: 5em;
+        top: -24px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    max-width: 300px;
+    font-size: 14px;
+    padding: 1.5em;
+    margin-bottom: 5em;
+
+    .top-section {
+      padding-top: 1.5em;
+
+      .social-icons img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    p.quote {
+      font-size: 1em;
+
+      &::before {
+        font-size: 5em;
+        top: -24px;
+      }
+    }
   }
 }
