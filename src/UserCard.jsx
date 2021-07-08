@@ -1,32 +1,62 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import "./UserCard.scss";
 
-const formatPhone = (phone) => {
-  return `(${phone.substring(0,3)}) ${phone.substring(4)}`;
-}
+const formatPhone = (phone) => `${phone.substr(0, 5)} ${phone.substr(6)}`;
 
 export default function UserCard({ user }) {
   const fullName = `${user.name.first} ${user.name.last}`;
-  
+  user.phone = formatPhone(user.phone);
+  user.cell = formatPhone(user.cell);
 
   return (
     <div className="user-card">
       <div className="top-section">
-        <img src={user.picture.large} alt="user image" />
-        <div class="personal-info">
+        <img
+          className="profile-pic"
+          src={user.picture.large}
+          alt="user image"
+        />
+        <div className="personal-info">
           <p className="name">
-            <label>Name</label>{fullName}</p>
-          <p class="email"><label>Email</label>{user.email}</p>
+            <label>Name</label>
+            {fullName}
+          </p>
+          <p className="email">
+            <label>Email</label>
+            <a href={`mailto:${user.email}`}>{user.email}</a>
+          </p>
           <div className="phone-section">
-            <p class="phone"><label>Primary Phone</label>{formatPhone(user.phone)}</p>
-            <p class="cell"><label>Cell Phone</label>{formatPhone(user.cell)}</p>
+            <p className="phone">
+              <label>Primary Phone</label>
+              <a href={`tel:+${user.phone}`}>{user.phone}</a>
+            </p>
+            <p className="cell">
+              <label>Cell Phone</label>
+              <a href={`tel:+${user.cell}`}>{user.cell}</a>
+            </p>
           </div>
-          
+          <div className="social-icons">
+            <a href="https://www.linkedin.com" target="_blank" title="LinkedIn">
+              <img
+                id="linkedin-logo"
+                src="./images/linkedin_logo.png"
+                alt="linkedin logo"
+              />
+            </a>
+            <a href="https://www.github.com" target="_blank" title="GitHub">
+              <img
+                id="github-logo"
+                src="./images/github_logo.png"
+                alt="github logo"
+              />
+            </a>
+          </div>
         </div>
       </div>
 
       <hr />
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic blanditiis est dolores architecto amet rerum aperiam voluptatum molestiae quasi itaque, dolor nesciunt nisi obcaecati quaerat sint quidem eligendi ad eaque!</p>
+      <p className="quote">{user.quote.quote}</p>
+      <p className="author">- {user.quote.author}</p>
     </div>
   );
 }
