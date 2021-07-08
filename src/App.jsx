@@ -4,34 +4,16 @@ import { getRandomUsers } from "./api";
 import { getRandomQuote } from "./quotes";
 import UserCard from "./UserCard";
 
-const _transformDefault = "transform: perspective(750px) rotateX(25deg)";
+const _transformDefault = "transform: perspective(750px) rotateX(30deg)";
 
 const handleScroll = (e) => {
   const userCards = Array.from(document.getElementsByClassName("user-card"));
-  const approxCenter = window.innerHeight * 0.4;
   userCards.forEach((c) => {
-    const cardY = c.getBoundingClientRect().y;
-    //  check if in view, if so calc scale
-    if (true) {
-      let distanceFromCenter = Math.abs(approxCenter - cardY / 2);
-      // in center region - use max scale
-      if (distanceFromCenter < window.innerHeight * 0.3) {
-        c.style = `${_transformDefault} scale(1.3); z-index: 2;`;
-      }
-      // else if (distanceFromCenter < window.innerHeight * 0.3) {
-      //   c.style = `${_transformDefault} scale(1.45);`;
-      // } else if (distanceFromCenter < window.innerHeight * 0.315) {
-      //   c.style = `${_transformDefault} scale(1.3);`;
-      // } else if (distanceFromCenter < window.innerHeight * 0.33) {
-      //   c.style = `${_transformDefault} scale(1.15);`;
-      // } else if (distanceFromCenter < window.innerHeight * 0.355) {
-      //   c.style = `${_transformDefault} scale(1);`;
-      // } else if (distanceFromCenter < window.innerHeight * 0.37) {
-      //   c.style = `${_transformDefault} scale(0.9);`;
-      // }
-      else {
-        c.style = `${_transformDefault};`;
-      }
+    const { y: cardY } = c.getBoundingClientRect();
+    if (cardY < window.innerHeight * 0.5 && cardY > 100) {
+      c.style = `transform: perspective(0px) rotateX(0deg) scale(1.25); z-index: 2;`;
+    } else {
+      c.style = `${_transformDefault};`;
     }
   });
 };
