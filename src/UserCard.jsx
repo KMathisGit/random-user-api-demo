@@ -1,5 +1,7 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import "./UserCard.scss";
+import linkedinLogo from "../images/linkedin_logo.png";
+import githubLogo from "../images/github_logo.png";
 
 const formatPhone = (phone) => `${phone.substr(0, 5)} ${phone.substr(6)}`;
 
@@ -37,18 +39,10 @@ export default function UserCard({ user }) {
           </div>
           <div className="social-icons">
             <a href="https://www.linkedin.com" target="_blank" title="LinkedIn">
-              <img
-                id="linkedin-logo"
-                src="./images/linkedin_logo.png"
-                alt="linkedin logo"
-              />
+              <img id="linkedin-logo" src={linkedinLogo} alt="linkedin logo" />
             </a>
             <a href="https://www.github.com" target="_blank" title="GitHub">
-              <img
-                id="github-logo"
-                src="./images/github_logo.png"
-                alt="github logo"
-              />
+              <img id="github-logo" src={githubLogo} alt="github logo" />
             </a>
           </div>
         </div>
