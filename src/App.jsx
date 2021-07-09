@@ -14,12 +14,18 @@ function App() {
 
   const handleScroll = useCallback(
     (e) => {
-      userCards.forEach((c) => {
-        const { y: cardY } = c.getBoundingClientRect();
-        // if card is near center of view add 'centered' class
-        if (cardY < window.innerHeight * 0.5 && cardY > 100) {
-          c.classList.contains("centered") ? null : c.classList.add("centered");
-        } else c.classList.remove("centered");
+      let section = Math.floor(
+        window.scrollY / (document.body.clientHeight / 21)
+      );
+      debugger;
+      userCards.forEach((c, i) => {
+        if (section === i) c.classList.add("centered");
+        else c.classList.remove("centered");
+        // const { y: cardY } = c.getBoundingClientRect();
+        // // if card is near center of view add 'centered' class
+        // if (cardY < window.innerHeight * 0.5 && cardY > 100) {
+        //   c.classList.contains("centered") ? null : c.classList.add("centered");
+        // } else c.classList.remove("centered");
       });
     },
     [userCards]
